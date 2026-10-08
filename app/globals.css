@@ -1,0 +1,142 @@
+@import "tailwindcss";
+
+/* ===== ערכת נושא בהירה (לבן) בסגנון Buffer ===== */
+:root {
+  --bg: #f6f7f8;          /* רקע ראשי בהיר */
+  --sidebar: #ffffff;     /* סיידבר לבן */
+  --card: #ffffff;        /* כרטיסי פוסט לבנים */
+  --card-2: #f1f2f4;      /* כרטיס פנימי / וידאו */
+  --border: #e6e7ea;      /* קווי הפרדה */
+  --green: #3ac97d;       /* ירוק Buffer */
+  --green-dim: #2f7d56;
+  --text: #1a1a1e;        /* טקסט ראשי */
+  --text-dim: #5e5e66;    /* טקסט משני */
+  --text-faint: #9a9aa2;  /* טקסט עמום */
+  --warn-bg: #fdf6e9;     /* רקע אזהרה */
+  --warn-border: #f0e2bd;
+  --warn-text: #976b1d;
+  --badge-bg: #e9f8f0;    /* רקע תגים ירוקים (מתוזמנים וכו') */
+  --badge-text: #127a4e;
+  --card-glow: 0 0 0 1px rgba(58,201,125,0.25), 0 4px 16px rgba(58,201,125,0.18); /* צל ירוק סביב משבצות */
+  --chart-line: #0f5257;  /* קו הגרף באנליטיקס */
+}
+
+/* כרטיס שמכבד את ערכת הנושא (בהיר/כהה) */
+.themed-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+/* ===== ערכת נושא כהה — מוחלפת בכפתור בפינה, נשמרת ב-localStorage ===== */
+html[data-theme="dark"] {
+  --bg: #101114;
+  --sidebar: #17181c;
+  --card: #17181c;
+  --card-2: #22242a;
+  --border: #2a2c33;
+  --green: #c1fe77;       /* צבע הכפתורים במצב כהה */
+  --green-dim: #a5e35c;
+  --text: #f2f3f5;
+  --text-dim: #a7a9b0;
+  --text-faint: #6d6f78;
+  --warn-bg: #2a2312;
+  --warn-border: #4d3f1c;
+  --warn-text: #e3b95c;
+  --badge-bg: rgba(193,254,119,0.14);
+  --badge-text: #c1fe77;
+  --card-glow: 0 0 0 1px rgba(193,254,119,0.28), 0 4px 16px rgba(193,254,119,0.14);
+  --chart-line: #c1fe77;
+}
+html[data-theme="dark"] * {
+  scrollbar-color: #3a3c44 transparent;
+}
+html[data-theme="dark"] *::-webkit-scrollbar-thumb { background: #3a3c44; }
+
+html {
+  font-family: "Assistant", Arial, sans-serif;
+  /* מקום קבוע לפס הגלילה: מעבר בין רשימה ללוח שנה לא מזיז את כל האפליקציה */
+  scrollbar-gutter: stable;
+}
+
+/* טיילווינד 4 הסיר את סמן היד מברירת המחדל של כפתורים. מחזירים אותו לכל האפליקציה
+   כדי שכל דבר לחיץ ירגיש לחיץ. */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cfd0d4 transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: #cfd0d4; border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Gentle page fade — applied by app/template.tsx on every route change */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.page-fade {
+  animation: pageFadeIn 0.22s ease;
+}
+
+/* ===== כותרת ערוץ אחידה: כפתור החזרה, הלוגו והשם על אותו קו ===== */
+.ch-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 26px;
+  /* הכותרת יורדת לקו שבו ישב כפתור "חזור אחורה" — הכפתור לא עולה למעלה */
+  padding: 150px 28px 26px;
+  border-bottom: 1px solid var(--border);
+}
+/* הצדדים נצמדים פנימה, לכיוון הלוגו והשם, כך שהכותרת נשארת ממורכזת בדף */
+.ch-head-side { display: flex; align-items: center; min-width: 0; justify-content: flex-end; }
+.ch-head-end { justify-content: flex-start; }
+.ch-head-main { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.ch-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--green);
+  border: none;
+  border-radius: 12px;
+  padding: 13px 28px;
+  color: #06301d;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  /* קצת אוויר בין הכפתור למשבצת הלוגו */
+  margin-inline-end: 30px;
+}
+
+/* בטלפונים: מקום לבר הניווט התחתון + כפתור הת'ים לא מסתיר אותו */
+@media (max-width: 767px) {
+  main { padding-bottom: 96px; }
+  .theme-toggle-btn { bottom: 92px !important; }
+  /* בטלפון: הכל נשאר על קו אחד — כפתור החזרה מתכווץ לחץ בלבד */
+  .ch-head { grid-template-columns: auto 1fr auto; padding: 64px 14px 16px; gap: 8px; }
+  .ch-head-main { gap: 10px; min-width: 0; }
+  .ch-head h1 { font-size: 20px; }
+  .ch-head p { font-size: 13px; }
+  .ch-back { padding: 11px 13px; border-radius: 12px; }
+  .ch-back-label { display: none; }
+}
+
+/* רצועת הסליידים בתצוגת הקרוסלה: גלילה בלי פס גלילה אפור מתחת */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { width: 0; height: 0; display: none; }
