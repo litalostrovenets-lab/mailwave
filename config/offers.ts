@@ -2,7 +2,7 @@
 // הקישורים כאן הם זמניים (example.com). בהקמה מחליפים אותם בכתובות האמיתיות.
 
 export const LINKS = {
-  challenge: "https://example.com/challenge",       // אתגר ניקוי אנטי דלקתי
+  challenge: "https://litalosshealthcoach.com/30daychallenge/#offer",       // אתגר 30 יום
   coaching: "https://litalosshealthcoach.com/#contact", // ליווי אישי 1:1 (הטופס באתר של ליטל)
   ingredientsGuide: "https://example.com/ingredients", // מדריך לקריאת רכיבים בסופר
   periodGuide: "https://example.com/period",         // מדריך לכאבי ווסת
