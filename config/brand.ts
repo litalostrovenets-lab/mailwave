@@ -20,17 +20,17 @@ export const BRAND = {
 
   // ===== שליחה =====
   // השם והכתובת שמהם יוצאים המיילים (הדומיין חייב להיות מאומת ב Resend)
-  fromName: "ליטל",
-  fromEmail: "team@example.com",
+  fromName: "Lital.oss",
+  fromEmail: "support@litalosshealthcoach.com",
   // כתובת לתשובות (אפשר להשאיר ריק)
   replyTo: "",
   // החתימה בסוף כל מייל (מעל התמונה העגולה)
   signOff: "באהבה ענקית,",
-  signName: "ליטל.",
+  signName: "Lital.oss",
   // כתובת ברירת המחדל לשליחת בדיקה
-  testEmail: "",
+  testEmail: "lital.ostrovenets@gmail.com",
   // הכתובת הציבורית של המערכת אחרי העלאה (בשביל קישורי הסרה)
-  siteUrl: "http://localhost:3012",
+  siteUrl: "https://mailwave-seven.vercel.app",
 
   // הטקסט בבאנר של מסך התזמון
   scheduleNote: "המיילים יוצאים לפי התאריך והשעה שנקבעו לכל מייל · אף אחד לא מקבל את אותו מייל פעמיים",
